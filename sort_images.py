@@ -91,7 +91,7 @@ def get_image_files(path, formats=('gif', 'jp2', 'jpeg', 'pcx', 'png', 'tiff', '
     if os.path.isfile(path):
         yield path
     else:
-        for root, dirs, files in os.walk(path):
+        for root, files in os.walk(path)[0:3:2]:
             for file in files:
                 if is_image(os.path.join(root, file)):
                     yield os.path.join(root, file)
