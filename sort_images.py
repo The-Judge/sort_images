@@ -27,8 +27,8 @@ def parseArgs():
                         help='Do not take any actions for real, just print what would be done. This ensures no data is '
                              'changed or directories created. Even logging is disabled.')
     parser.add_argument('-l', '--logfile', metavar='/path/to/logfile',
-                        help='Specify the filename to which to write the log to\n (Default: /tmp/sort_images.log)',
-                        default='/tmp/sort_images.log')
+                        help='Specify the filename to which to write the log to\n (Default: ~/sort_images.log)',
+                        default='~/sort_images.log')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='Be verbose during execution.')
     parser.add_argument('-m', '--monthly', action='store_true',
