@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+sort_images is a collection of tools to organize unsorted media files
+"""
 import pyexifinfo
 import os
 import sys
@@ -7,6 +10,8 @@ import argparse
 import shutil
 import magic
 import daiquiri, logging
+
+__version__ = '0.1'
 
 class myparser(argparse.ArgumentParser):
     """
@@ -19,6 +24,10 @@ class myparser(argparse.ArgumentParser):
         sys.exit(1)
 
 def parseArgs():
+    """
+    Function which handles argument parsing.
+    :return: argparse.Namespace
+    """
     parser = myparser(description='This script searches for image files in a secified source folder and moves those '
                                   'found to a defined destination folder. Inside that destination folder, it '
                                   'automatically generates subfolders for the year (and optionally the month) the '
@@ -48,10 +57,13 @@ def parseArgs():
 def setupLogging(logfile, dryrun=False, verbose=False):
     """
     This generates a daiquiri logging object.
-    :param logfile: a str object, naming the destination of a logfile
-    :param dryrun: bool which switches dryrun on or off
-    :param verbose: bool which switches verbosity on or off
-    :return:
+    :param logfile: naming the destination of a logfile
+    :type logfile: str
+    :param dryrun: switches dryrun on or off
+    :type dryrun: bool
+    :param verbose: switches verbosity on or off
+    :type verbose: bool
+    :return: daiquiri.KeywordArgumentAdapter
     """
     stream_level = logging.DEBUG
     if dryrun:
@@ -74,7 +86,9 @@ def get_image_files(path, formats=('gif', 'jp2', 'jpeg', 'pcx', 'png', 'tiff', '
     """
     Check path recursively for files. If any compatible file is found, it is yielded with it's full path.
     :param formats: An iterable listing all mime formats (skipping the class part like 'images/') to include
-    :param path:
+    :type formats: iterable
+    :param path: Path to search supported files in
+    :type path: str
     :return: yield absolute path
     """
     def is_image(file_name):
