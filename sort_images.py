@@ -27,8 +27,8 @@ def parseArgs():
                         help='Do not take any actions for real, just print what would be done. This ensures no data is '
                              'changed or directories created. Even logging is disabled.')
     parser.add_argument('-l', '--logfile', metavar='/path/to/logfile',
-                        help='Specify the filename to which to write the log to\n (Default: /tmp/sort_images.log)',
-                        default='/tmp/sort_images.log')
+                        help='Specify the filename to which to write the log to\n (Default: ~/sort_images.log)',
+                        default='~/sort_images.log')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='Be verbose during execution.')
     parser.add_argument('-m', '--monthly', action='store_true',
@@ -91,7 +91,7 @@ def get_image_files(path, formats=('gif', 'jp2', 'jpeg', 'pcx', 'png', 'tiff', '
     if os.path.isfile(path):
         yield path
     else:
-        for root, dirs, files in os.walk(path):
+        for root, _, files in os.walk(path):
             for file in files:
                 if is_image(os.path.join(root, file)):
                     yield os.path.join(root, file)
